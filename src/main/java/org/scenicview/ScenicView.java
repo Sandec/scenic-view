@@ -79,13 +79,16 @@ public class ScenicView extends Application {
     }
 
     public static void show(final Parent target) {
+        show(target, new Stage());
+    }
+
+    public static void show(final Parent target, Stage stage) {
         if (target == null) {
             return;
         }
         
         startup();
 
-        final Stage stage = new Stage();
         
         // workaround for RT-10714
         stage.setWidth(1024);

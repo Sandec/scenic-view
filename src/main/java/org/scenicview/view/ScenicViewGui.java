@@ -285,8 +285,11 @@ public class ScenicViewGui {
         tabPane = new TabPane();
         tabPane.getSelectionModel().selectedItemProperty().addListener((ov, oldValue, newValue) -> updateMenuBar(oldValue, newValue));
 
-        javadocTab = new JavaDocTab(this); 
-        
+        boolean isJPro = Boolean.getBoolean("jpro.isbrowser");
+        if(!isJPro) {
+            javadocTab = new JavaDocTab(this);
+        }
+
         eventsTab = new EventLogTab(this);
         eventsTab.activeProperty().addListener((ov, oldValue, newValue) -> {
             configuration.setEventLogEnabled(newValue);
@@ -298,8 +301,13 @@ public class ScenicViewGui {
         
         // CSSFX
         cssfxTab = new CSSFXTab(this);
-        
-        tabPane.getTabs().addAll(detailsTab, eventsTab, /*animationsTab,*/ javadocTab, threeDOMTab, cssfxTab);
+
+        if(isJPro) {
+
+            tabPane.getTabs().addAll(detailsTab, eventsTab, /*animationsTab,*/ /*javadocTab,*/ threeDOMTab, cssfxTab);
+        } else {
+            tabPane.getTabs().addAll(detailsTab, eventsTab, /*animationsTab,*/ javadocTab, threeDOMTab, cssfxTab);
+        }
         // /3Dom
         
         Persistence.loadProperty("splitPaneDividerPosition", splitPane, 0.3);
