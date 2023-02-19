@@ -4,7 +4,9 @@ plugins {
     id 'org.beryx.jlink' version '2.6.5'
 }
 
-mainClassName = "org.scenicview.scenicview/org.scenicview.ScenicView"
+// somehow breaks module system, when using it as a library
+//mainClassName = "org.scenicview.scenicview/org.scenicview.ScenicView"
+
 group = 'org.scenic-view'
 version = '11.0.3-SNAPSHOT-FORK'
 
